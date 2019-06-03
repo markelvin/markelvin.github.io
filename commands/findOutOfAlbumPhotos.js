@@ -45,7 +45,7 @@ async function requestPagedRecursively(method, path, body, processResults, pageT
 }
 
 async function runAsync(checkSharedAlbums) {
-	await requestPagedRecursively('GET', '/mediaItems?pageSize=100', '{ "filters": { "dateFilter": { "ranges": [ { "startDate": { "year": 2018, "month": 1, "day": 1 }, "endDate": { "year": 2019, "month": 1, "day": 1 } } ] } } }', async (results) =>
+	await requestPagedRecursively('GET', '/mediaItems?pageSize=100', { filters: { dateFilter: { ranges: [ { startDate: { year: 2018, month: 1, day: 1 }, endDate: { year: 2018, month: 2, day: 1 } } ] } } }, async (results) =>
 		storeMediaItems(results.mediaItems));
 
 	await requestPagedRecursively('GET', '/albums?pageSize=50', null, async (results) => {
