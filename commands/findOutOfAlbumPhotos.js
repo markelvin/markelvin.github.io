@@ -53,7 +53,7 @@ async function runAsync(checkSharedAlbums) {
 
 		for (const a of results.albums) {
 			await requestPagedRecursively(
-				'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100, filters: { dateFilter: { ranges: [ { startDate: { year: 2018, month: 1, day: 1 }, endDate: { year: 2018, month: 2, day: 1 } } ] } }    },
+				'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100, ,
 				async (results) => forgetMediaItems(results.mediaItems));
 		}
 	});
@@ -64,7 +64,7 @@ async function runAsync(checkSharedAlbums) {
 
 			for (const a of results.sharedAlbums) {
 				await requestPagedRecursively(
-					'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100, filters: { dateFilter: { ranges: [ { startDate: { year: 2018, month: 1, day: 1 }, endDate: { year: 2018, month: 2, day: 1 } } ] } }   },
+					'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100, ,
 					async (results) => forgetMediaItems(results.mediaItems));
 			}
 		});
