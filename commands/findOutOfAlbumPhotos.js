@@ -1,3 +1,4 @@
+    
 import apiGooglePhotos from '../helpers/google-photos.js';
 
 const _mediaItems = {};
@@ -45,7 +46,7 @@ async function requestPagedRecursively(method, path, body, processResults, pageT
 }
 
 async function runAsync(checkSharedAlbums) {
-	await requestPagedRecursively('GET', '/mediaItems?pageSize=100',null, async (results) =>
+	await requestPagedRecursively('GET', '/mediaItems?pageSize=100', null, async (results) =>
 		storeMediaItems(results.mediaItems));
 
 	await requestPagedRecursively('GET', '/albums?pageSize=50', null, async (results) => {
@@ -53,7 +54,7 @@ async function runAsync(checkSharedAlbums) {
 
 		for (const a of results.albums) {
 			await requestPagedRecursively(
-				'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100, ,
+				'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100 },
 				async (results) => forgetMediaItems(results.mediaItems));
 		}
 	});
@@ -64,7 +65,7 @@ async function runAsync(checkSharedAlbums) {
 
 			for (const a of results.sharedAlbums) {
 				await requestPagedRecursively(
-					'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100, ,
+					'POST', '/mediaItems:search', { albumId: a.id, pageSize: 100 },
 					async (results) => forgetMediaItems(results.mediaItems));
 			}
 		});
@@ -145,17 +146,6 @@ export default [
 			console.log('findOutOfAlbumPhotos(w/shared) : running');
 			const output = await runAsync(true);
 			console.log('findOutOfAlbumPhotos(w/shared) : finished');
-			return output;
-		}
-	},
-	{
-		name: 'Find out-of-album photos (2019c)',
-		scopes: 'https://www.googleapis.com/auth/photoslibrary.readonly',
-
-		async run() {
-			console.log('findOutOfAlbumPhotos(2019c) : running');
-			const output = await runAsync(true);
-			console.log('findOutOfAlbumPhotos(2019c) : finished');
 			return output;
 		}
 	}
