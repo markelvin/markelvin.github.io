@@ -149,13 +149,13 @@ export default [
 		}
 	},
 	{
-		name: 'Find out-of-album photos (2019a)',
+		name: 'Find out-of-album photos (2019b)',
 		scopes: 'https://www.googleapis.com/auth/photoslibrary.readonly',
 
 		async run() {
-			console.log('findOutOfAlbumPhotos(2019a) : running');
+			console.log('findOutOfAlbumPhotos(2019b) : running');
 			const output = await runAsync(true);
-			console.log('findOutOfAlbumPhotos(2019a) : finished');
+			console.log('findOutOfAlbumPhotos(2019b) : finished');
 			return output;
 		}
 	}
