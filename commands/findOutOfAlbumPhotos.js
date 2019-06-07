@@ -45,7 +45,7 @@ async function requestPagedRecursively(method, path, body, processResults, pageT
 }
 
 async function runAsync(checkSharedAlbums) {
-	await requestPagedRecursively('GET', '/mediaItems?pageSize=100', { filters: { dateFilter: { ranges: [ { startDate: { year: 2018, month: 1, day: 1 }, endDate: { year: 2018, month: 2, day: 1 } } ] } } }, async (results) =>
+	await requestPagedRecursively('GET', '/mediaItems?pageSize=100',null, async (results) =>
 		storeMediaItems(results.mediaItems));
 
 	await requestPagedRecursively('GET', '/albums?pageSize=50', null, async (results) => {
@@ -149,13 +149,13 @@ export default [
 		}
 	},
 	{
-		name: 'Find out-of-album photos (2019b)',
+		name: 'Find out-of-album photos (2019c)',
 		scopes: 'https://www.googleapis.com/auth/photoslibrary.readonly',
 
 		async run() {
-			console.log('findOutOfAlbumPhotos(2019b) : running');
+			console.log('findOutOfAlbumPhotos(2019c) : running');
 			const output = await runAsync(true);
-			console.log('findOutOfAlbumPhotos(2019b) : finished');
+			console.log('findOutOfAlbumPhotos(2019c) : finished');
 			return output;
 		}
 	}
